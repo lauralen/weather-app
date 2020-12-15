@@ -5,7 +5,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem 2rem;
+  padding: 4rem 2rem;
+  text-align: center;
   background-color: $color-primary;
   background-image: radial-gradient(
     darken($color-primary, 10%),
@@ -36,7 +37,7 @@
 
 .radioButtons {
   display: flex;
-  margin-top: 2rem;
+  margin: 2rem;
   font-size: 1.6rem;
   color: $color-white;
 }

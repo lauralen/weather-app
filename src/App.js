@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import openWeatherKey from "./utils/openWeatherKey";
+
 import WeatherCard from "./components/WeatherCard";
+import Button from "./components/Button";
+
 import style from "./App.module.scss";
 
 function App() {
@@ -91,6 +94,8 @@ function App() {
               <label htmlFor="imperial">Fahrenheit</label>
             </div>
           </div>
+
+          <Button>Search</Button>
         </form>
       </header>
 
