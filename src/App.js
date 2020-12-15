@@ -9,6 +9,7 @@ import style from "./App.module.scss";
 function App() {
   const [location, setLocation] = useState("");
   const [units, setUnits] = useState("metric");
+  const [favorites, setFavorites] = useState([]);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -44,6 +45,13 @@ function App() {
 
   const changeUnits = event => {
     setUnits(event.target.value);
+  };
+
+  const favoriteCity = name => {
+    const updatedList = [...favorites, name];
+
+    localStorage.setItem("favoriteCities", JSON.stringify(updatedList));
+    setFavorites(updatedList);
   };
 
   return (
@@ -95,7 +103,7 @@ function App() {
             </div>
           </div>
 
-          <Button>Search</Button>
+          <Button type="primary">Search</Button>
         </form>
       </header>
 
@@ -105,7 +113,7 @@ function App() {
         ) : error ? (
           <p className={style.error}>{error}</p>
         ) : data ? (
-          <WeatherCard data={data} units={units} />
+          <WeatherCard data={data} units={units} favoriteCity={favoriteCity} />
         ) : (
           <p>Search location to see weather data</p>
         )}

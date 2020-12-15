@@ -1,7 +1,8 @@
 import React from "react";
+import Button from "./Button";
 import style from "./WeatherCard.module.scss";
 
-const WeatherCard = ({ data, units }) => {
+const WeatherCard = ({ data, units, favoriteCity }) => {
   const { name, sys, main, weather, wind } = data;
   const { temp, feels_like, humidity } = main;
   const { description, icon } = weather[0];
@@ -13,9 +14,19 @@ const WeatherCard = ({ data, units }) => {
 
   return (
     <section className={style.section}>
-      <h2>
-        {name}, {sys.country}
-      </h2>
+      <div className={style.header}>
+        <h2>
+          {name}, {sys.country}
+        </h2>
+        <Button
+          type="secondary"
+          onClick={() => {
+            favoriteCity(name);
+          }}
+        >
+          + Add to favorites
+        </Button>
+      </div>
       <img
         className={style.icon}
         src={`http://openweathermap.org/img/w/${icon}.png`}
