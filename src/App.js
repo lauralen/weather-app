@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import openWeatherKey from "./utils/openWeatherKey";
+import WeatherCard from "./components/WeatherCard";
 import style from "./App.module.scss";
 
 function App() {
@@ -59,7 +60,7 @@ function App() {
         ) : error ? (
           <p className={style.error}>{error}</p>
         ) : data ? (
-          JSON.stringify(data)
+          <WeatherCard data={data} />
         ) : (
           <p>Search location to see weather data</p>
         )}
