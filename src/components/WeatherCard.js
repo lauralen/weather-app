@@ -1,13 +1,15 @@
 import React from "react";
 import style from "./WeatherCard.module.scss";
 
-const WeatherCard = ({ data }) => {
-  console.log(data);
-  const degreeSymbol = "°C";
-
+const WeatherCard = ({ data, units }) => {
   const { name, sys, main, weather, wind } = data;
   const { temp, feels_like, humidity } = main;
   const { description, icon } = weather[0];
+
+  const unit =
+    units === "metric"
+      ? { temperature: "°C", speed: "m/s" }
+      : { temperature: "°F", speed: "mph" };
 
   return (
     <section className={style.section}>
@@ -26,14 +28,14 @@ const WeatherCard = ({ data }) => {
           <span>Temperature</span>
           <span>
             {temp}
-            {degreeSymbol}
+            {unit.temperature}
           </span>
         </li>
         <li>
           <span>Feels like</span>
           <span>
             {feels_like}
-            {degreeSymbol}
+            {unit.temperature}
           </span>
         </li>
         <li>
@@ -42,7 +44,9 @@ const WeatherCard = ({ data }) => {
         </li>
         <li>
           <span>Wind speed</span>
-          <span>{wind.speed} m/s</span>
+          <span>
+            {wind.speed} {unit.speed}
+          </span>
         </li>
       </ul>
     </section>

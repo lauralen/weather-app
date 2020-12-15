@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import openWeatherKey from "./utils/openWeatherKey";
 import WeatherCard from "./components/WeatherCard";
 import style from "./App.module.scss";
 
 function App() {
   const [location, setLocation] = useState("");
+  const [units, setUnits] = useState("metric");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    data && fetchData();
+  }, [units]);
 
   const fetchData = async () => {
     setLoading(true);
     setError(null);
 
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${openWeatherKey}`
+      `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=${units}&appid=${openWeatherKey}`
     )
       .then(response => response.json())
       .then(response => {
@@ -32,6 +37,10 @@ function App() {
     setData(null);
     setError(message);
     console.error(message);
+  };
+
+  const changeUnits = event => {
+    setUnits(event.target.value);
   };
 
   return (
@@ -52,15 +61,46 @@ function App() {
             type="text"
             placeholder="Search"
           />
+
+          <div className={style.radioButtons}>
+            <div className={style.radioButtonWrapper}>
+              <input
+                id="metric"
+                value="metric"
+                name="units"
+                type="radio"
+                checked={units === "metric"}
+                onChange={event => {
+                  changeUnits(event);
+                }}
+              />
+              <label htmlFor="metric">Celcius</label>
+            </div>
+
+            <div className={style.radioButtonWrapper}>
+              <input
+                id="imperial"
+                value="imperial"
+                name="units"
+                type="radio"
+                checked={units === "imperial"}
+                onChange={event => {
+                  changeUnits(event);
+                }}
+              />
+              <label htmlFor="imperial">Fahrenheit</label>
+            </div>
+          </div>
         </form>
       </header>
+
       <main className={style.main}>
         {loading ? (
           <div className={style.loader} />
         ) : error ? (
           <p className={style.error}>{error}</p>
         ) : data ? (
-          <WeatherCard data={data} />
+          <WeatherCard data={data} units={units} />
         ) : (
           <p>Search location to see weather data</p>
         )}

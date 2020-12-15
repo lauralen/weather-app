@@ -34,6 +34,23 @@
   }
 }
 
+.radioButtons {
+  display: flex;
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  color: $color-white;
+}
+
+.radioButtonWrapper {
+  &:first-child {
+    margin-right: 2rem;
+  }
+
+  input {
+    margin-right: 1rem;
+  }
+}
+
 .main {
   padding: 2rem;
 }
