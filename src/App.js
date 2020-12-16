@@ -33,7 +33,8 @@ function App() {
       .then(response => response.json())
       .then(response => {
         if (response.cod === 200) {
-          setData({ ...response, units });
+          const isFavorite = favorites.includes(city);
+          setData({ ...response, units, isFavorite });
         } else {
           handleError("Failed to load data");
         }

@@ -3,7 +3,7 @@ import Button from "./Button";
 import style from "./WeatherCard.module.scss";
 
 const WeatherCard = ({ data, favoriteCity }) => {
-  const { name, sys, main, weather, wind, units } = data;
+  const { name, sys, main, weather, wind, units, isFavorite } = data;
   const { temp, feels_like, humidity } = main;
   const { description, icon } = weather[0];
 
@@ -18,15 +18,18 @@ const WeatherCard = ({ data, favoriteCity }) => {
         <h2>
           {name}, {sys.country}
         </h2>
-        <Button
-          type="secondary"
-          onClick={() => {
-            favoriteCity(name);
-          }}
-        >
-          + Add to favorites
-        </Button>
+        {isFavorite ? null : (
+          <Button
+            type="secondary"
+            onClick={() => {
+              favoriteCity(name);
+            }}
+          >
+            + Add to favorites
+          </Button>
+        )}
       </div>
+
       <img
         className={style.icon}
         src={`http://openweathermap.org/img/w/${icon}.png`}
