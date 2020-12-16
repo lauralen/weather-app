@@ -17,23 +17,33 @@ function App() {
   useEffect(() => {
     const favoriteCities = JSON.parse(localStorage.getItem("favoriteCities"));
     favoriteCities?.length && setFavorites(favoriteCities);
+
+    navigator.geolocation.getCurrentPosition(location => {
+      const { latitude, longitude } = location.coords;
+      fetchData({ latitude: latitude, longitude });
+    });
   }, []);
 
   useEffect(() => {
     localStorage.setItem("favoriteCities", JSON.stringify(favorites));
   }, [favorites]);
 
-  const fetchData = async city => {
+  const fetchData = async location => {
     setLoading(true);
     setError(null);
 
+    const locationQuery =
+      typeof location === "string"
+        ? `q=${location}`
+        : `lat=${location.latitude}&lon=${location.longitude}`;
+
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${openWeatherKey}`
+      `http://api.openweathermap.org/data/2.5/weather?${locationQuery}&units=${units}&appid=${openWeatherKey}`
     )
       .then(response => response.json())
       .then(response => {
         if (response.cod === 200) {
-          const isFavorite = favorites.includes(city);
+          const isFavorite = favorites.includes(response.name);
           setData({ ...response, units, isFavorite });
         } else {
           handleError("Failed to load data");
