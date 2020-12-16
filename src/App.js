@@ -15,6 +15,11 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const favoriteCities = JSON.parse(localStorage.getItem("favoriteCities"));
+    favoriteCities?.length && setFavorites(favoriteCities);
+  }, []);
+
+  useEffect(() => {
     data && fetchData();
   }, [units]);
 
@@ -117,6 +122,19 @@ function App() {
         ) : (
           <p>Search location to see weather data</p>
         )}
+
+        <section className={style.section}>
+          <h2>Favorite cities</h2>
+          <ul className={style.cities}>
+            {favorites?.length ? (
+              favorites.map(city => {
+                return <li key={city}>{city}</li>;
+              })
+            ) : (
+              <p>No cities added to favorites</p>
+            )}
+          </ul>
+        </section>
       </main>
     </>
   );

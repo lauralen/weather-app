@@ -56,6 +56,10 @@
   padding: 2rem;
 }
 
+.section:not(:last-child) {
+  margin-bottom: 3rem;
+}
+
 .loader {
   width: 5rem;
   height: 5rem;
@@ -67,6 +71,20 @@
 
 .error {
   color: $color-red;
+}
+
+.cities {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  li {
+    margin-bottom: 1rem;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
 }
 
 @keyframes spin {
