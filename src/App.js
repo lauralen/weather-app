@@ -113,15 +113,21 @@ function App() {
       </header>
 
       <main className={style.main}>
-        {loading ? (
-          <div className={style.loader} />
-        ) : error ? (
-          <p className={style.error}>{error}</p>
-        ) : data ? (
-          <WeatherCard data={data} units={units} favoriteCity={favoriteCity} />
-        ) : (
-          <p>Search location to see weather data</p>
-        )}
+        <section className={style.section}>
+          {loading ? (
+            <div className={style.loader} />
+          ) : error ? (
+            <p className={style.error}>{error}</p>
+          ) : data ? (
+            <WeatherCard
+              data={data}
+              units={units}
+              favoriteCity={favoriteCity}
+            />
+          ) : (
+            <p>Search location to see weather data</p>
+          )}
+        </section>
 
         <section className={style.section}>
           <h2>Favorite cities</h2>

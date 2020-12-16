@@ -13,7 +13,7 @@ const WeatherCard = ({ data, units, favoriteCity }) => {
       : { temperature: "°F", speed: "mph" };
 
   return (
-    <section className={style.section}>
+    <div className={style.container}>
       <div className={style.header}>
         <h2>
           {name}, {sys.country}
@@ -60,7 +60,7 @@ const WeatherCard = ({ data, units, favoriteCity }) => {
           </span>
         </li>
       </ul>
-    </section>
+    </div>
   );
 };
 
