@@ -23,12 +23,12 @@ function App() {
     data && fetchData();
   }, [units]);
 
-  const fetchData = async () => {
+  const fetchData = async city => {
     setLoading(true);
     setError(null);
 
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=${units}&appid=${openWeatherKey}`
+      `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${openWeatherKey}`
     )
       .then(response => response.json())
       .then(response => {
@@ -67,7 +67,7 @@ function App() {
         <form
           onSubmit={event => {
             event.preventDefault();
-            location.length && fetchData();
+            location.length && fetchData(location);
           }}
         >
           <input
@@ -134,7 +134,18 @@ function App() {
           <ul className={style.cities}>
             {favorites?.length ? (
               favorites.map(city => {
-                return <li key={city}>{city}</li>;
+                return (
+                  <li key={city}>
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        fetchData(city);
+                      }}
+                    >
+                      {city}
+                    </Button>
+                  </li>
+                );
               })
             ) : (
               <p>No cities added to favorites</p>
