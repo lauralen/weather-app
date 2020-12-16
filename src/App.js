@@ -19,6 +19,10 @@ function App() {
     favoriteCities?.length && setFavorites(favoriteCities);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("favoriteCities", JSON.stringify(favorites));
+  }, [favorites]);
+
   const fetchData = async city => {
     setLoading(true);
     setError(null);
@@ -50,8 +54,6 @@ function App() {
 
   const favoriteCity = name => {
     const updatedList = [...favorites, name];
-
-    localStorage.setItem("favoriteCities", JSON.stringify(updatedList));
     setFavorites(updatedList);
   };
 
