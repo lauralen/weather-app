@@ -60,6 +60,14 @@
   margin-bottom: 3rem;
 }
 
+.sectionHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
 .loader {
   width: 5rem;
   height: 5rem;

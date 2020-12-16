@@ -122,7 +122,20 @@ function App() {
         </section>
 
         <section className={style.section}>
-          <h2>Favorite cities</h2>
+          <div className={style.sectionHeader}>
+            <h2>Favorite cities</h2>
+            {favorites?.length ? (
+              <Button
+                type="secondary"
+                onClick={() => {
+                  setFavorites([]);
+                }}
+              >
+                Clear all
+              </Button>
+            ) : null}
+          </div>
+
           <ul className={style.cities}>
             {favorites?.length ? (
               favorites.map(city => {
