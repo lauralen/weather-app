@@ -19,10 +19,6 @@ function App() {
     favoriteCities?.length && setFavorites(favoriteCities);
   }, []);
 
-  useEffect(() => {
-    data && fetchData();
-  }, [units]);
-
   const fetchData = async city => {
     setLoading(true);
     setError(null);
@@ -33,7 +29,7 @@ function App() {
       .then(response => response.json())
       .then(response => {
         if (response.cod === 200) {
-          setData(response);
+          setData({ ...response, units });
         } else {
           handleError("Failed to load data");
         }
@@ -119,11 +115,7 @@ function App() {
           ) : error ? (
             <p className={style.error}>{error}</p>
           ) : data ? (
-            <WeatherCard
-              data={data}
-              units={units}
-              favoriteCity={favoriteCity}
-            />
+            <WeatherCard data={data} favoriteCity={favoriteCity} />
           ) : (
             <p>Search location to see weather data</p>
           )}
