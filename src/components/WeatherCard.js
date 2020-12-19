@@ -2,7 +2,7 @@ import React from "react";
 import Button from "./Button";
 import style from "./WeatherCard.module.scss";
 
-const WeatherCard = ({ data, favorites, favoriteCity }) => {
+const WeatherCard = ({ data, favorites, setFavorites }) => {
   const { name, sys, main, weather, wind, units } = data;
   const { temp, feels_like, humidity } = main;
   const { description, icon } = weather[0];
@@ -24,7 +24,7 @@ const WeatherCard = ({ data, favorites, favoriteCity }) => {
           <Button
             type="secondary"
             onClick={() => {
-              favoriteCity(name);
+              setFavorites([...favorites, name]);
             }}
           >
             + Add to favorites

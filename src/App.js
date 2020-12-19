@@ -62,11 +62,6 @@ function App() {
     setUnits(event.target.value);
   };
 
-  const favoriteCity = name => {
-    const updatedList = [...favorites, name];
-    setFavorites(updatedList);
-  };
-
   return (
     <>
       <header className={style.header}>
@@ -130,7 +125,7 @@ function App() {
             <WeatherCard
               data={data}
               favorites={favorites}
-              favoriteCity={favoriteCity}
+              setFavorites={setFavorites}
             />
           ) : (
             <p>Search location to see weather data</p>
