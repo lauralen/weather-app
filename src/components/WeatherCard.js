@@ -41,14 +41,14 @@ const WeatherCard = ({ data, favoriteCity }) => {
         <li>
           <span>Temperature</span>
           <span>
-            {temp}
+            {Math.round(temp)}
             {unit.temperature}
           </span>
         </li>
         <li>
           <span>Feels like</span>
           <span>
-            {feels_like}
+            {Math.round(feels_like)}
             {unit.temperature}
           </span>
         </li>
@@ -59,7 +59,7 @@ const WeatherCard = ({ data, favoriteCity }) => {
         <li>
           <span>Wind speed</span>
           <span>
-            {wind.speed} {unit.speed}
+            {Math.round(wind.speed)} {unit.speed}
           </span>
         </li>
       </ul>
