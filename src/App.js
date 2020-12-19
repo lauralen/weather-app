@@ -160,6 +160,14 @@ function App() {
                     >
                       {city}
                     </Button>
+                    <Button
+                      type="secondary"
+                      onClick={() => {
+                        setFavorites(favorites.filter(fav => fav !== city));
+                      }}
+                    >
+                      x
+                    </Button>
                   </li>
                 );
               })
