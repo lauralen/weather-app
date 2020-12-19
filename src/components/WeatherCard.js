@@ -2,10 +2,12 @@ import React from "react";
 import Button from "./Button";
 import style from "./WeatherCard.module.scss";
 
-const WeatherCard = ({ data, favoriteCity }) => {
-  const { name, sys, main, weather, wind, units, isFavorite } = data;
+const WeatherCard = ({ data, favorites, favoriteCity }) => {
+  const { name, sys, main, weather, wind, units } = data;
   const { temp, feels_like, humidity } = main;
   const { description, icon } = weather[0];
+
+  const isFavorite = favorites.includes(name);
 
   const unit =
     units === "metric"

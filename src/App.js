@@ -43,8 +43,7 @@ function App() {
       .then(response => response.json())
       .then(response => {
         if (response.cod === 200) {
-          const isFavorite = favorites.includes(response.name);
-          setData({ ...response, units, isFavorite });
+          setData({ ...response, units });
         } else {
           handleError("Failed to load data");
         }
@@ -128,7 +127,11 @@ function App() {
           ) : error ? (
             <p className={style.error}>{error}</p>
           ) : data ? (
-            <WeatherCard data={data} favoriteCity={favoriteCity} />
+            <WeatherCard
+              data={data}
+              favorites={favorites}
+              favoriteCity={favoriteCity}
+            />
           ) : (
             <p>Search location to see weather data</p>
           )}
