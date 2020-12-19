@@ -5,9 +5,10 @@ import style from "./WeatherCard.module.scss";
 const WeatherCard = ({ data, favorites, setFavorites }) => {
   const { name, sys, main, weather, wind, units } = data;
   const { temp, feels_like, humidity } = main;
+  const { country } = sys;
   const { description, icon } = weather[0];
 
-  const isFavorite = favorites.includes(name);
+  const isFavorite = favorites.find(city => city.name === name);
 
   const unit =
     units === "metric"
@@ -18,13 +19,13 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
     <div className={style.container}>
       <div className={style.header}>
         <h2>
-          {name}, {sys.country}
+          {name}, {country}
         </h2>
         {isFavorite ? null : (
           <Button
             type="secondary"
             onClick={() => {
-              setFavorites([...favorites, name]);
+              setFavorites([...favorites, { name, country }]);
             }}
           >
             + Add to favorites

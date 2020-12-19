@@ -150,20 +150,24 @@ function App() {
           <ul className={style.cities}>
             {favorites?.length ? (
               favorites.map(city => {
+                const { name, country } = city;
+
                 return (
                   <li key={city}>
                     <Button
                       type="primary"
                       onClick={() => {
-                        fetchData(city);
+                        fetchData(name);
                       }}
                     >
-                      {city}
+                      {name}, {country}
                     </Button>
                     <Button
                       type="secondary"
                       onClick={() => {
-                        setFavorites(favorites.filter(fav => fav !== city));
+                        setFavorites(
+                          favorites.filter(fav => fav.name !== name)
+                        );
                       }}
                     >
                       x
