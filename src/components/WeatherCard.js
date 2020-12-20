@@ -25,7 +25,7 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
         </h2>
         {isFavorite ? null : (
           <Button
-            type="secondary"
+            type="primary"
             onClick={() => {
               setFavorites([...favorites, { name, country }]);
             }}

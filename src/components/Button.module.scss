@@ -30,7 +30,12 @@
   }
 }
 
-.secondary {
+.danger {
   composes: button;
   background-color: transparent;
+
+  &:hover,
+  &:focus {
+    color: $color-red;
+  }
 }

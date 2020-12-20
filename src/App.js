@@ -137,7 +137,7 @@ function App() {
             <h2>Favorite cities</h2>
             {favorites?.length ? (
               <Button
-                type="secondary"
+                type="primary"
                 onClick={() => {
                   setFavorites([]);
                 }}
@@ -163,7 +163,7 @@ function App() {
                       {name}, {country}
                     </Button>
                     <Button
-                      type="secondary"
+                      type="danger"
                       onClick={() => {
                         setFavorites(
                           favorites.filter(fav => fav.name !== name)
