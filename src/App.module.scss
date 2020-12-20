@@ -1,11 +1,12 @@
 @import "./scss/variables";
+@import "./scss/mixins";
 
 .header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
   text-align: center;
   background-color: $color-primary;
   background-image: radial-gradient(
@@ -13,6 +14,16 @@
     $color-primary
   );
   box-shadow: 0 1rem 2rem $color-lightgrey;
+
+  @include respond-tablet {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 3rem 5rem;
+  }
+
+  @include respond-desktop {
+    padding: 3rem 10rem;
+  }
 }
 
 .input {
@@ -53,11 +64,36 @@
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
+
+  @include respond-tablet {
+    padding: 3rem 8rem;
+  }
+
+  @include respond-desktop {
+    flex-direction: row;
+  }
 }
 
-.section:not(:last-child) {
-  margin-bottom: 3rem;
+.section {
+  width: 100%;
+  padding: 2rem;
+  border: 2px solid $color-primary;
+  border-radius: $border-radius;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  @include respond-desktop {
+    margin: 0 2rem;
+
+    &:not(:last-child) {
+      margin-bottom: 0rem;
+    }
+  }
 }
 
 .sectionHeader {
