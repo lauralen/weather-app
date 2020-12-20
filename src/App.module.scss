@@ -119,17 +119,7 @@
 }
 
 .cities {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  li {
-    margin-bottom: 1rem;
-
-    &:not(:last-child) {
-      margin-right: 3rem;
-    }
-  }
+  @include list;
 }
 
 @keyframes spin {

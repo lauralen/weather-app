@@ -9,3 +9,19 @@
     @content;
   }
 }
+
+@mixin list {
+  font-weight: 300;
+  font-size: 1.8rem;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+
+    &:not(:last-child) {
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid $color-primary;
+    }
+  }
+}
