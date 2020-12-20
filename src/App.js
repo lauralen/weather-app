@@ -153,7 +153,7 @@ function App() {
                 const { name, country } = city;
 
                 return (
-                  <li key={city}>
+                  <li key={city.name}>
                     <Button
                       type="primary"
                       onClick={() => {
