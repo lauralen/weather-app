@@ -44,6 +44,7 @@ function App() {
       .then(response => {
         if (response.cod === 200) {
           setData({ ...response, units });
+          setLocation("");
         } else {
           handleError("Failed to load data");
         }
