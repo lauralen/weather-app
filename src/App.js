@@ -78,7 +78,7 @@ function App() {
             value={location}
             onChange={event => setLocation(event.target.value)}
             type="text"
-            placeholder="Search"
+            placeholder="Enter city"
           />
 
           <div className={style.radioButtons}>
