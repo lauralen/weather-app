@@ -23,7 +23,7 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
         <h2>
           {name}, {country}
         </h2>
-        {isFavorite ? null : (
+        {isFavorite || favorites.length > 20 ? null : (
           <Button
             type="primary"
             onClick={() => {
