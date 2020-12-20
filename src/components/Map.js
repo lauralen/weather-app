@@ -3,10 +3,7 @@ import { MapContainer, TileLayer, Marker, LayersControl } from "react-leaflet";
 import openWeatherKey from "../utils/openWeatherKey";
 import style from "./Map.module.scss";
 
-function Map({ data }) {
-  const { lon, lat } = data.coord;
-  const position = [lat, lon];
-
+function Map({ position }) {
   const layers = [
     { value: "clouds", name: "Clouds" },
     { value: "precipitation", name: "Precipitation" },
@@ -21,7 +18,7 @@ function Map({ data }) {
         center={position}
         zoom={6}
         scrollWheelZoom={false}
-        style={{ height: "50vh", width: "100%" }}
+        style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

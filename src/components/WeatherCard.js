@@ -1,10 +1,12 @@
 import React from "react";
 import Button from "./Button";
+import Map from "./Map";
 import style from "./WeatherCard.module.scss";
 
 const WeatherCard = ({ data, favorites, setFavorites }) => {
-  const { name, sys, main, weather, wind, units } = data;
+  const { name, sys, main, weather, wind, units, coord } = data;
   const { temp, feels_like, humidity } = main;
+  const { lon, lat } = coord;
   const { country } = sys;
   const { description, icon } = weather[0];
 
@@ -66,6 +68,8 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
           </span>
         </li>
       </ul>
+
+      <Map position={[lat, lon]} />
     </div>
   );
 };

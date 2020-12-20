@@ -3,7 +3,6 @@ import openWeatherKey from "./utils/openWeatherKey";
 
 import WeatherCard from "./components/WeatherCard";
 import Button from "./components/Button";
-import Map from "./components/Map";
 
 import style from "./App.module.scss";
 
@@ -123,14 +122,11 @@ function App() {
           ) : error ? (
             <p className={style.error}>{error}</p>
           ) : data ? (
-            <>
-              <WeatherCard
-                data={data}
-                favorites={favorites}
-                setFavorites={setFavorites}
-              />
-              <Map data={data} />
-            </>
+            <WeatherCard
+              data={data}
+              favorites={favorites}
+              setFavorites={setFavorites}
+            />
           ) : (
             <p>Search location to see weather data</p>
           )}
