@@ -38,7 +38,7 @@ function App() {
         : `lat=${location.latitude}&lon=${location.longitude}`;
 
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?${locationQuery}&units=${units}&appid=${openWeatherKey}`
+      `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&units=${units}&appid=${openWeatherKey}`
     )
       .then(response => response.json())
       .then(response => {

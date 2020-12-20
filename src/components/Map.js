@@ -31,7 +31,7 @@ function Map({ position }) {
               <LayersControl.BaseLayer key={value} name={name}>
                 <TileLayer
                   attribution='Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>'
-                  url={`http://{s}.tile.openweathermap.org/map/${value}_new/{z}/{x}/{y}.png?appid=${openWeatherKey}`}
+                  url={`https://{s}.tile.openweathermap.org/map/${value}_new/{z}/{x}/{y}.png?appid=${openWeatherKey}`}
                 />
               </LayersControl.BaseLayer>
             );

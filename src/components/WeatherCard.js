@@ -37,7 +37,7 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
 
       <img
         className={style.icon}
-        src={`http://openweathermap.org/img/w/${icon}.png`}
+        src={`https://openweathermap.org/img/w/${icon}.png`}
         alt="Weather icon"
       />
       <p className={style.description}>{description}</p>
