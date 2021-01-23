@@ -13,6 +13,7 @@ function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [locationErrors, setLocationErrors] = useState([]);
 
   useEffect(() => {
     const favoriteCities = JSON.parse(localStorage.getItem("favoriteCities"));
@@ -94,6 +95,18 @@ function App() {
       : 0;
   };
 
+  const validateLocation = value => {
+    let errors = [];
+
+    if (value.length > 20) {
+      errors.push("Maximum 20 symbols");
+    } else if (value.length && !value.match(/^[a-zA-Z]+$/)) {
+      errors.push("Only letters allowed");
+    }
+
+    setLocationErrors(errors);
+  };
+
   return (
     <>
       <header className={style.header}>
@@ -102,16 +115,26 @@ function App() {
         <form
           onSubmit={event => {
             event.preventDefault();
-            location.length && fetchData(location);
+            location.length && !locationErrors.length && fetchData(location);
           }}
         >
           <input
             className={style.input}
             value={location}
-            onChange={event => setLocation(event.target.value)}
+            onChange={event => {
+              const { value } = event.target;
+
+              validateLocation(value);
+              setLocation(value);
+            }}
             type="text"
             placeholder="Enter city"
           />
+          {locationErrors.length
+            ? locationErrors.map(error => {
+                return <div className={style.error}>{error}</div>;
+              })
+            : null}
 
           <div className={style.radioButtons}>
             <div className={style.radioButtonWrapper}>
@@ -143,7 +166,12 @@ function App() {
             </div>
           </div>
 
-          <Button type="primary">Search</Button>
+          <Button
+            type="primary"
+            disabled={!location.length || locationErrors.length}
+          >
+            Search
+          </Button>
         </form>
       </header>
 
