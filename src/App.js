@@ -37,20 +37,24 @@ function App() {
         ? `q=${location}`
         : `lat=${location.latitude}&lon=${location.longitude}`;
 
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&units=${units}&appid=${openWeatherKey}`
-    )
-      .then(response => response.json())
-      .then(response => {
-        if (response.cod === 200) {
-          setData({ ...response, units });
-          setLocation("");
-        } else {
-          handleError("Failed to load data");
-        }
-      })
-      .catch(error => handleError(String(error)))
-      .finally(() => setLoading(false));
+    try {
+      let response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&units=${units}&appid=${openWeatherKey}`
+      );
+
+      response = await response.json();
+
+      if (response.cod === 200) {
+        setData({ ...response, units });
+        setLocation("");
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      handleError(String(error));
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleError = message => {
