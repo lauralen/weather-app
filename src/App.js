@@ -184,6 +184,13 @@ function App() {
           />
         </Section>
       </SideMenu>
+
+      <div
+        className={`${style.overlay} ${sideMenuOpen && style.visible}`}
+        onClick={() => {
+          setSideMenuOpen(false);
+        }}
+      />
     </>
   );
 }
