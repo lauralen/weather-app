@@ -20,7 +20,7 @@ html {
 body {
   box-sizing: border-box;
   font-family: $font-main;
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 ul {
@@ -33,12 +33,6 @@ a {
 }
 
 h1 {
-  margin-bottom: 4rem;
-  font-size: 3rem;
+  font-size: 1.6rem;
   color: $color-white;
-}
-
-h2 {
-  font-size: 2rem;
-  color: $color-black;
 }

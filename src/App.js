@@ -8,11 +8,13 @@ import WeatherCard from "./components/WeatherCard";
 import Button from "./components/Button";
 import Tooltip from "./components/Tooltip";
 import TemperatureUnitSelect from "./components/TemperatureUnitSelect";
+import Section from "./components/Section";
 
 import style from "./App.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCog, faTimes } from "@fortawesome/free-solid-svg-icons";
+import FavoriteCities from "./components/FavoriteCities";
 
 function App() {
   const [location, setLocation] = useState("");
@@ -75,32 +77,6 @@ function App() {
 
   const changeUnits = event => {
     setUnits(event.target.value);
-  };
-  const sortObjects = (property, secondaryProperty) => {
-    return function (firstObject, secondObject) {
-      let firstProperty = firstObject[property];
-      let secondProperty = secondObject[property];
-      let result;
-
-      if (firstProperty === secondProperty && secondaryProperty) {
-        let firstProperty = firstObject[secondaryProperty];
-        let secondProperty = secondObject[secondaryProperty];
-
-        result = getSortResult(firstProperty, secondProperty);
-      } else {
-        result = getSortResult(firstProperty, secondProperty);
-      }
-
-      return result;
-    };
-  };
-
-  const getSortResult = (firstProperty, secondProperty) => {
-    return firstProperty < secondProperty
-      ? -1
-      : firstProperty > secondProperty
-      ? 1
-      : 0;
   };
 
   const validateLocation = value => {
@@ -179,57 +155,6 @@ function App() {
             <p>Search location to see weather data</p>
           )}
         </section>
-
-        <section className={style.section}>
-          <div className={style.sectionHeader}>
-            <h2>Favorite cities</h2>
-            {favorites?.length ? (
-              <Button
-                type="primary"
-                onClick={() => {
-                  setFavorites([]);
-                }}
-              >
-                Clear all
-              </Button>
-            ) : null}
-          </div>
-
-          <ul className={style.cities}>
-            {favorites?.length ? (
-              favorites
-                .sort(sortObjects("country", "name", "ascending"))
-                .map(city => {
-                  const { name, country } = city;
-
-                  return (
-                    <li key={city.name}>
-                      <Button
-                        type="primary"
-                        onClick={() => {
-                          fetchData(name);
-                        }}
-                      >
-                        {name}, {country}
-                      </Button>
-                      <Button
-                        type="danger"
-                        onClick={() => {
-                          setFavorites(
-                            favorites.filter(fav => fav.name !== name)
-                          );
-                        }}
-                      >
-                        x
-                      </Button>
-                    </li>
-                  );
-                })
-            ) : (
-              <p>No cities added to favorites</p>
-            )}
-          </ul>
-        </section>
       </main>
 
       <SideMenu
@@ -247,7 +172,17 @@ function App() {
           <FontAwesomeIcon icon={faTimes} color="white" />
         </Button>
 
-        <TemperatureUnitSelect units={units} changeUnits={changeUnits} />
+        <Section>
+          <TemperatureUnitSelect units={units} changeUnits={changeUnits} />
+        </Section>
+
+        <Section>
+          <FavoriteCities
+            favorites={favorites}
+            setFavorites={setFavorites}
+            fetchData={fetchData}
+          />
+        </Section>
       </SideMenu>
     </>
   );

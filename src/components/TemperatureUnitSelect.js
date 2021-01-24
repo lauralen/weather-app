@@ -4,7 +4,7 @@ import style from "./TemperatureUnitSelect.module.scss";
 const TemperatureUnitSelect = ({ units, changeUnits }) => {
   return (
     <div className={style.radioButtons} role="radiogroup">
-      <p>Temperature units:</p>
+      <h1>Temperature units:</h1>
       <div className={style.radioButtonWrapper}>
         <input
           id="metric"
