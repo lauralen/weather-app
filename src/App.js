@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import openWeatherKey from "./utils/openWeatherKey";
 
 import Header from "./layout/Header";
+import SideMenu from "./layout/SideMenu";
 
 import WeatherCard from "./components/WeatherCard";
 import Button from "./components/Button";
@@ -10,7 +11,7 @@ import Tooltip from "./components/Tooltip";
 import style from "./App.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faCog } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faCog, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [location, setLocation] = useState("");
@@ -20,6 +21,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [locationErrors, setLocationErrors] = useState([]);
+  const [sideMenuOpen, setSideMenuOpen] = useState(false);
 
   useEffect(() => {
     const favoriteCities = JSON.parse(localStorage.getItem("favoriteCities"));
@@ -148,46 +150,14 @@ function App() {
               })}
             </Tooltip>
           ) : null}
-
-          {/* <div className={style.radioButtons}>
-            <div className={style.radioButtonWrapper}>
-              <input
-                id="metric"
-                value="metric"
-                name="units"
-                type="radio"
-                checked={units === "metric"}
-                onChange={event => {
-                  changeUnits(event);
-                }}
-              />
-              <label htmlFor="metric">Celcius</label>
-            </div>
-
-            <div className={style.radioButtonWrapper}>
-              <input
-                id="imperial"
-                value="imperial"
-                name="units"
-                type="radio"
-                checked={units === "imperial"}
-                onChange={event => {
-                  changeUnits(event);
-                }}
-              />
-              <label htmlFor="imperial">Fahrenheit</label>
-            </div>
-          </div>
-
-          <Button
-            type="primary"
-            disabled={!location.length || locationErrors.length}
-          >
-            Search
-          </Button> */}
         </form>
 
-        <Button type="primary">
+        <Button
+          type="primary"
+          onClick={() => {
+            setSideMenuOpen(!sideMenuOpen);
+          }}
+        >
           <FontAwesomeIcon icon={faCog} />
         </Button>
       </Header>
@@ -260,6 +230,52 @@ function App() {
           </ul>
         </section>
       </main>
+
+      <SideMenu
+        isOpen={sideMenuOpen}
+        close={() => {
+          setSideMenuOpen(false);
+        }}
+      >
+        <Button
+          type="primary"
+          onClick={() => {
+            setSideMenuOpen(false);
+          }}
+        >
+          <FontAwesomeIcon icon={faTimes} />
+        </Button>
+
+        <div className={style.radioButtons}>
+          <div className={style.radioButtonWrapper}>
+            <input
+              id="metric"
+              value="metric"
+              name="units"
+              type="radio"
+              checked={units === "metric"}
+              onChange={event => {
+                changeUnits(event);
+              }}
+            />
+            <label htmlFor="metric">Celcius</label>
+          </div>
+
+          <div className={style.radioButtonWrapper}>
+            <input
+              id="imperial"
+              value="imperial"
+              name="units"
+              type="radio"
+              checked={units === "imperial"}
+              onChange={event => {
+                changeUnits(event);
+              }}
+            />
+            <label htmlFor="imperial">Fahrenheit</label>
+          </div>
+        </div>
+      </SideMenu>
     </>
   );
 }
