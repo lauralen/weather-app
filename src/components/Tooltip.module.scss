@@ -1,0 +1,29 @@
+@import "../scss/variables";
+
+.tooltip {
+  position: absolute;
+  top: 120%;
+  left: 3rem;
+  width: 80%;
+  padding: 1rem;
+  font-size: 1.4rem;
+  border-radius: $border-radius;
+  background-color: $color-white;
+  box-shadow: 0 1rem 2rem rgba($color-black, 0.3);
+
+  &.error {
+    box-shadow: 0 1rem 2rem rgba($color-red, 0.3);
+    color: $color-red;
+  }
+
+  &::before {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent $color-white transparent;
+  }
+}

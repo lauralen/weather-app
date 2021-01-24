@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import openWeatherKey from "./utils/openWeatherKey";
 
+import Header from "./layout/Header";
+
 import WeatherCard from "./components/WeatherCard";
 import Button from "./components/Button";
+import Tooltip from "./components/Tooltip";
 
 import style from "./App.module.scss";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faCog } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [location, setLocation] = useState("");
@@ -67,7 +73,6 @@ function App() {
   const changeUnits = event => {
     setUnits(event.target.value);
   };
-
   const sortObjects = (property, secondaryProperty) => {
     return function (firstObject, secondObject) {
       let firstProperty = firstObject[property];
@@ -100,7 +105,9 @@ function App() {
 
     if (value.length > 20) {
       errors.push("Maximum 20 symbols");
-    } else if (value.length && !value.match(/^[a-zA-Z]+$/)) {
+    }
+
+    if (value.length && !value.match(/^[a-zA-Z]+$/)) {
       errors.push("Only letters allowed");
     }
 
@@ -109,17 +116,19 @@ function App() {
 
   return (
     <>
-      <header className={style.header}>
-        <h1>Weather App</h1>
-
+      <Header>
         <form
+          className={style.form}
           onSubmit={event => {
             event.preventDefault();
             location.length && !locationErrors.length && fetchData(location);
           }}
         >
+          <FontAwesomeIcon icon={faSearch} className={style.searchIcon} />
           <input
-            className={style.input}
+            className={`${style.input} ${
+              locationErrors.length ? style.invalid : null
+            }`}
             value={location}
             onChange={event => {
               const { value } = event.target;
@@ -129,14 +138,18 @@ function App() {
             }}
             type="text"
             placeholder="Enter city"
+            required
           />
-          {locationErrors.length
-            ? locationErrors.map(error => {
-                return <div className={style.error}>{error}</div>;
-              })
-            : null}
 
-          <div className={style.radioButtons}>
+          {locationErrors.length ? (
+            <Tooltip type="error">
+              {locationErrors.map(error => {
+                return <div key={error}>{error}</div>;
+              })}
+            </Tooltip>
+          ) : null}
+
+          {/* <div className={style.radioButtons}>
             <div className={style.radioButtonWrapper}>
               <input
                 id="metric"
@@ -171,9 +184,13 @@ function App() {
             disabled={!location.length || locationErrors.length}
           >
             Search
-          </Button>
+          </Button> */}
         </form>
-      </header>
+
+        <Button type="primary">
+          <FontAwesomeIcon icon={faCog} />
+        </Button>
+      </Header>
 
       <main className={style.main}>
         <section className={style.section}>

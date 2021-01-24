@@ -1,34 +1,20 @@
 @import "./scss/variables";
 @import "./scss/mixins";
 
-.header {
+.form {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
-  padding: 3rem 2rem;
-  text-align: center;
-  background-color: $color-primary;
-  background-image: radial-gradient(
-    darken($color-primary, 10%),
-    $color-primary
-  );
-  box-shadow: 0 1rem 2rem $color-lightgrey;
+}
 
-  @include respond-tablet {
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 3rem 5rem;
-  }
-
-  @include respond-desktop {
-    padding: 3rem 10rem;
-  }
+.searchIcon {
+  font-size: 1.3rem;
 }
 
 .input {
-  width: 100%;
-  padding: 1rem 2rem;
+  margin: 0 1rem;
+  padding: 1rem;
   border: none;
   border-radius: $border-radius;
   font-size: 1.6rem;
@@ -43,6 +29,11 @@
 
   &::-webkit-input-placeholder {
     color: $color-darkgrey;
+  }
+
+  &.invalid,
+  &.invalid:focus {
+    box-shadow: 0 1rem 2rem rgba($color-red, 0.3);
   }
 }
 
