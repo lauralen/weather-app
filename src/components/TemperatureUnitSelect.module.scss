@@ -1,0 +1,16 @@
+@import "../scss/variables";
+
+.radioButtons {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 2rem;
+  font-size: 1.6rem;
+}
+
+.radioButtonWrapper {
+  margin-top: 0.7rem;
+
+  input {
+    margin-right: 1rem;
+  }
+}

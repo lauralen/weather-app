@@ -7,6 +7,7 @@ import SideMenu from "./layout/SideMenu";
 import WeatherCard from "./components/WeatherCard";
 import Button from "./components/Button";
 import Tooltip from "./components/Tooltip";
+import TemperatureUnitSelect from "./components/TemperatureUnitSelect";
 
 import style from "./App.module.scss";
 
@@ -243,38 +244,10 @@ function App() {
             setSideMenuOpen(false);
           }}
         >
-          <FontAwesomeIcon icon={faTimes} />
+          <FontAwesomeIcon icon={faTimes} color="white" />
         </Button>
 
-        <div className={style.radioButtons}>
-          <div className={style.radioButtonWrapper}>
-            <input
-              id="metric"
-              value="metric"
-              name="units"
-              type="radio"
-              checked={units === "metric"}
-              onChange={event => {
-                changeUnits(event);
-              }}
-            />
-            <label htmlFor="metric">Celcius</label>
-          </div>
-
-          <div className={style.radioButtonWrapper}>
-            <input
-              id="imperial"
-              value="imperial"
-              name="units"
-              type="radio"
-              checked={units === "imperial"}
-              onChange={event => {
-                changeUnits(event);
-              }}
-            />
-            <label htmlFor="imperial">Fahrenheit</label>
-          </div>
-        </div>
+        <TemperatureUnitSelect units={units} changeUnits={changeUnits} />
       </SideMenu>
     </>
   );

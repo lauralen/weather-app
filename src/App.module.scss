@@ -37,23 +37,6 @@
   }
 }
 
-.radioButtons {
-  display: flex;
-  margin: 0 2rem;
-  font-size: 1.6rem;
-  color: $color-white;
-}
-
-.radioButtonWrapper {
-  &:first-child {
-    margin-right: 2rem;
-  }
-
-  input {
-    margin-right: 1rem;
-  }
-}
-
 .main {
   display: flex;
   flex-direction: column;
