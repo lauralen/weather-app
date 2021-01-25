@@ -3,6 +3,9 @@ import style from "./FavoriteCities.module.scss";
 
 import Button from "./Button";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
 const FavoriteCities = ({ favorites, setFavorites, fetchData }) => {
   const sortObjects = (property, secondaryProperty) => {
     return function (firstObject, secondObject) {
@@ -33,8 +36,19 @@ const FavoriteCities = ({ favorites, setFavorites, fetchData }) => {
 
   return (
     <>
-      <div>
+      <div className={style.header}>
         <h1>Favorite cities</h1>
+
+        {favorites?.length ? (
+          <Button
+            type="danger"
+            onClick={() => {
+              setFavorites([]);
+            }}
+          >
+            Clear all
+          </Button>
+        ) : null}
       </div>
 
       <ul className={style.cities}>
@@ -60,7 +74,7 @@ const FavoriteCities = ({ favorites, setFavorites, fetchData }) => {
                       setFavorites(favorites.filter(fav => fav.name !== name));
                     }}
                   >
-                    x
+                    <FontAwesomeIcon icon={faTimes} />
                   </Button>
                 </li>
               );
@@ -69,17 +83,6 @@ const FavoriteCities = ({ favorites, setFavorites, fetchData }) => {
           <p>No cities added to favorites</p>
         )}
       </ul>
-
-      {favorites?.length ? (
-        <Button
-          type="primary"
-          onClick={() => {
-            setFavorites([]);
-          }}
-        >
-          Clear all
-        </Button>
-      ) : null}
     </>
   );
 };

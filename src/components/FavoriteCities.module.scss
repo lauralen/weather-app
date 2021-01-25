@@ -1,1 +1,23 @@
 @import "../scss/variables";
+@import "../scss/mixins";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cities {
+  font-weight: 300;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+
+    &:not(:last-child) {
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid $color-white;
+    }
+  }
+}
