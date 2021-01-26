@@ -1,6 +1,10 @@
 @import "../scss/variables";
+@import "../scss/mixins";
 
 .mapWrapper {
-  height: 70vh;
-  margin-top: 3rem;
+  height: 50vh;
+
+  @include respond-desktop {
+    height: inherit;
+  }
 }
