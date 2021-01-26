@@ -2,6 +2,7 @@ import React from "react";
 import style from "./WeatherCard.module.scss";
 
 import Button from "./Button";
+import WeatherIcon from "./WeatherIcon";
 import Map from "./Map";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,7 +18,7 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
   const { temp_max, temp_min, humidity } = main;
   const { lon, lat } = coord;
   const { country } = sys;
-  const { description, icon } = weather[0];
+  const { description, id } = weather[0];
 
   const isFavorite = favorites.find(city => city.name === name);
 
@@ -47,11 +48,9 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
         </h2>
 
         <div>
-          <img
-            className={style.icon}
-            src={`https://openweathermap.org/img/w/${icon}.png`}
-            alt="Weather icon"
-          />
+          <div className={style.icon}>
+            <WeatherIcon id={String(id)} />
+          </div>
           <p className={style.description}>{description}</p>
           <h3>
             {Math.round(temp_max)}
