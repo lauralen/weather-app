@@ -62,21 +62,29 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
 
         <ul className={style.list}>
           <li>
-            <FontAwesomeIcon icon={faTint} />
-            <span>Humidity</span>
-            <span>{humidity}%</span>
+            <div className={style.listItemIcon}>
+              <FontAwesomeIcon icon={faTint} />
+            </div>
+            <span className={style.listItemTitle}>Humidity</span>
+            <span className={style.listItemValue}>{humidity}%</span>
           </li>
+
           <li>
-            <FontAwesomeIcon icon={faWind} />
-            <span>Wind speed</span>
-            <span>
+            <div className={style.listItemIcon}>
+              <FontAwesomeIcon icon={faWind} />
+            </div>
+            <span className={style.listItemTitle}>Wind speed</span>
+            <span className={style.listItemValue}>
               {Math.round(wind.speed)} {unit.speed}
             </span>
           </li>
+
           <li>
-            <FontAwesomeIcon icon={faCloud} />
-            <span>Cloudiness</span>
-            <span>{clouds.all} %</span>
+            <div className={style.listItemIcon}>
+              <FontAwesomeIcon icon={faCloud} />
+            </div>
+            <span className={style.listItemTitle}>Cloudiness</span>
+            <span className={style.listItemValue}>{clouds.all} %</span>
           </li>
         </ul>
       </div>
