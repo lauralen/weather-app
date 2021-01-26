@@ -9,12 +9,12 @@ import Button from "./components/Button";
 import Tooltip from "./components/Tooltip";
 import TemperatureUnitSelect from "./components/TemperatureUnitSelect";
 import Section from "./components/Section";
+import FavoriteCities from "./components/FavoriteCities";
 
 import style from "./App.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCog, faTimes } from "@fortawesome/free-solid-svg-icons";
-import FavoriteCities from "./components/FavoriteCities";
 
 function App() {
   const [location, setLocation] = useState("");
@@ -86,7 +86,7 @@ function App() {
       errors.push("Maximum 20 symbols");
     }
 
-    if (value.length && !value.match(/^[a-zA-Z]+$/)) {
+    if (value.length && !value.match(/^[a-zA-Z\s]*$/)) {
       errors.push("Only letters allowed");
     }
 
@@ -140,21 +140,19 @@ function App() {
       </Header>
 
       <main className={style.main}>
-        <section className={style.section}>
-          {loading ? (
-            <div className={style.loader} />
-          ) : error ? (
-            <p className={style.error}>{error}</p>
-          ) : data ? (
-            <WeatherCard
-              data={data}
-              favorites={favorites}
-              setFavorites={setFavorites}
-            />
-          ) : (
-            <p>Search location to see weather data</p>
-          )}
-        </section>
+        {loading ? (
+          <div className={style.loader} />
+        ) : error ? (
+          <p className={style.error}>{error}</p>
+        ) : data ? (
+          <WeatherCard
+            data={data}
+            favorites={favorites}
+            setFavorites={setFavorites}
+          />
+        ) : (
+          <p>Search location to see weather data</p>
+        )}
       </main>
 
       <SideMenu
