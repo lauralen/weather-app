@@ -2,18 +2,35 @@
 @import "../scss/mixins";
 
 .container {
+  min-height: calc(100vh - 5.9rem);
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    padding: 1rem;
+  }
+
+  @include respond-desktop {
+    flex-direction: row;
+
+    > * {
+      width: 50%;
+    }
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
   text-align: center;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.icon {
-  display: inline-block;
+.favoriteWrapper {
+  align-self: flex-end;
+  min-height: 3.5rem;
+  margin-bottom: 3rem;
 }
 
 .description {
@@ -24,5 +41,18 @@
 }
 
 .list {
-  @include list;
+  margin-top: 5rem;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  font-weight: 300;
+  font-size: 1.8rem;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
 }

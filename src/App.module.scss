@@ -38,44 +38,7 @@
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-
-  @include respond-tablet {
-    padding: 3rem 8rem;
-  }
-
-  @include respond-desktop {
-    flex-direction: row;
-  }
-}
-
-.section {
-  width: 100%;
-  padding: 2rem;
-  border: 2px solid $color-primary;
-  border-radius: $border-radius;
-
-  &:not(:last-child) {
-    margin-bottom: 3rem;
-  }
-
-  @include respond-desktop {
-    margin: 0 2rem;
-
-    &:not(:last-child) {
-      margin-bottom: 0rem;
-    }
-  }
-}
-
-.sectionHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
+  min-height: calc(100vh - 5.9rem);
 }
 
 .loader {
@@ -90,10 +53,6 @@
 
 .error {
   color: $color-red;
-}
-
-.cities {
-  @include list;
 }
 
 .overlay {
