@@ -44,9 +44,9 @@
 .loader {
   width: 5rem;
   height: 5rem;
-  margin: auto;
-  border: 1rem solid $color-primary;
-  border-top: 1rem solid $color-black;
+  margin: 1rem;
+  border: 1rem solid $color-lightgrey;
+  border-top: 1rem solid $color-primary;
   border-radius: 50%;
   animation: spin 2s linear infinite;
 }
