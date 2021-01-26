@@ -2,7 +2,7 @@
 
 ## About
 
-React web app application that displays current weather information using OpenWeatherMap API.
+React web app that displays current weather information using OpenWeatherMap API.
 
 ### Features
 
