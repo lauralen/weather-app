@@ -33,7 +33,7 @@ function App() {
     navigator.geolocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords;
       fetchData({ latitude: latitude, longitude });
-    });
+    },()=>setError("Cannot access your location"));
   }, []);
 
   useEffect(() => {
