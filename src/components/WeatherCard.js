@@ -14,10 +14,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const WeatherCard = ({ data, favorites, setFavorites }) => {
-  const { name, sys, main, weather, wind, units, coord, clouds } = data;
-  const { temp_max, temp_min, humidity } = main;
-  const { lon, lat } = coord;
-  const { country } = sys;
+  const {
+    temp,
+    humidity,
+    clouds,
+    weather,
+    wind_speed,
+    country,
+    name,
+    coord,
+    units
+  } = data;
+  const { lat, lon } = coord;
   const { description, id } = weather[0];
 
   const isFavorite = favorites.find(city => city.name === name);
@@ -53,8 +61,7 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
           </div>
           <p className={style.description}>{description}</p>
           <h3>
-            {Math.round(temp_max)}
-            {unit.temperature} / {Math.round(temp_min)}
+            {Math.round(temp)}
             {unit.temperature}
           </h3>
         </div>
@@ -74,7 +81,7 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
             </div>
             <span className={style.listItemTitle}>Wind speed</span>
             <span className={style.listItemValue}>
-              {Math.round(wind.speed)} {unit.speed}
+              {Math.round(wind_speed)} {unit.speed}
             </span>
           </li>
 

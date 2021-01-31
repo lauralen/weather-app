@@ -18,7 +18,6 @@ import { faSearch, faCog, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [location, setLocation] = useState("");
-  const [displayedLocation, setDisplayedLocation] = useState("");
   const [units, setUnits] = useState("metric");
   const [favorites, setFavorites] = useState([]);
   const [data, setData] = useState(null);
@@ -47,7 +46,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    displayedLocation && fetchData(displayedLocation, units);
+    data && fetchData(data.locationInfo.name, units);
   }, [units]);
 
   useEffect(() => {
@@ -58,6 +57,26 @@ function App() {
     setLoading(true);
     setError(null);
 
+    const locationInfo = await getLocationInfo(location);
+
+    try {
+      const { lat, lon } = locationInfo.coord;
+
+      let response = await fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${units}&appid=${openWeatherKey}`
+      );
+
+      response = await response.json();
+
+      setData({ ...response, locationInfo, units });
+    } catch (error) {
+      handleError(String(error));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function getLocationInfo(location) {
     const locationQuery =
       typeof location === "string"
         ? `q=${location}`
@@ -65,21 +84,21 @@ function App() {
 
     try {
       let response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&units=${units}&appid=${openWeatherKey}`
+        `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&appid=${openWeatherKey}`
       );
 
       response = await response.json();
 
       if (response.cod === 200) {
-        setDisplayedLocation(location);
-        setData({ ...response, units });
+        const { name, coord, sys } = response;
+        const { country } = sys;
+
+        return { name, coord, country };
       } else {
         throw new Error(response.message);
       }
     } catch (error) {
       handleError(String(error));
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -165,7 +184,11 @@ function App() {
           <p className={style.error}>{error}</p>
         ) : data ? (
           <WeatherCard
-            data={data}
+            data={{
+              ...data.current,
+              ...data.locationInfo,
+              units: data.units
+            }}
             favorites={favorites}
             setFavorites={setFavorites}
           />
