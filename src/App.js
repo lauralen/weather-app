@@ -6,6 +6,7 @@ import SideMenu from "./layout/SideMenu";
 
 import WeatherCard from "./components/WeatherCard";
 import ForecastCard from "./components/ForecastCard";
+import Map from "./components/Map";
 import Button from "./components/Button";
 import Tooltip from "./components/Tooltip";
 import TemperatureUnitSelect from "./components/TemperatureUnitSelect";
@@ -208,6 +209,12 @@ function App() {
                 />
               );
             })}
+            <Map
+              position={[
+                data.locationInfo.coord.lat,
+                data.locationInfo.coord.lon
+              ]}
+            />
           </>
         ) : (
           <p>Search location to see weather data</p>

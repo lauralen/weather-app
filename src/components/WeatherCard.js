@@ -3,7 +3,6 @@ import style from "./WeatherCard.module.scss";
 
 import Button from "./Button";
 import WeatherIcon from "./WeatherIcon";
-import Map from "./Map";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,10 +21,8 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
     wind_speed,
     country,
     name,
-    coord,
     units
   } = data;
-  const { lat, lon } = coord;
   const { description, id } = weather[0];
 
   const isFavorite = favorites.find(city => city.name === name);
@@ -93,8 +90,6 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
           </li>
         </ul>
       </div>
-
-      <Map position={[lat, lon]} />
     </div>
   );
 };
