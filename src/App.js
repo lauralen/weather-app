@@ -5,6 +5,7 @@ import Header from "./layout/Header";
 import SideMenu from "./layout/SideMenu";
 
 import WeatherCard from "./components/WeatherCard";
+import ForecastCard from "./components/ForecastCard";
 import Button from "./components/Button";
 import Tooltip from "./components/Tooltip";
 import TemperatureUnitSelect from "./components/TemperatureUnitSelect";
@@ -183,15 +184,31 @@ function App() {
         ) : error ? (
           <p className={style.error}>{error}</p>
         ) : data ? (
-          <WeatherCard
-            data={{
-              ...data.current,
-              ...data.locationInfo,
-              units: data.units
-            }}
-            favorites={favorites}
-            setFavorites={setFavorites}
-          />
+          <>
+            <WeatherCard
+              data={{
+                ...data.current,
+                ...data.locationInfo,
+                units: data.units
+              }}
+              favorites={favorites}
+              setFavorites={setFavorites}
+            />
+
+            <h3 className={style.description}>Forecast</h3>
+            {data.daily.map((dayData, index) => {
+              return (
+                <ForecastCard
+                  key={index}
+                  data={{
+                    ...dayData,
+                    ...data.locationInfo,
+                    units: data.units
+                  }}
+                />
+              );
+            })}
+          </>
         ) : (
           <p>Search location to see weather data</p>
         )}

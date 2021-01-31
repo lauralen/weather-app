@@ -51,10 +51,10 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
           )}
         </div>
 
+        <h3 className={style.description}>Current weather</h3>
         <h2>
           {name}, {country}
         </h2>
-
         <div>
           <div className={style.icon}>
             <WeatherIcon id={String(id)} />
@@ -65,7 +65,6 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
             {unit.temperature}
           </h3>
         </div>
-
         <ul className={style.list}>
           <li>
             <div className={style.listItemIcon}>
@@ -90,7 +89,7 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
               <FontAwesomeIcon icon={faCloud} />
             </div>
             <span className={style.listItemTitle}>Cloudiness</span>
-            <span className={style.listItemValue}>{clouds.all} %</span>
+            <span className={style.listItemValue}>{clouds} %</span>
           </li>
         </ul>
       </div>

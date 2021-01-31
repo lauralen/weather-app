@@ -41,6 +41,14 @@
   min-height: calc(100vh - 5.9rem);
 }
 
+.description {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-align: center;
+}
+
 .loader {
   width: 5rem;
   height: 5rem;
