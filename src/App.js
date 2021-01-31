@@ -18,6 +18,7 @@ import { faSearch, faCog, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [location, setLocation] = useState("");
+  const [displayedLocation, setDisplayedLocation] = useState("");
   const [units, setUnits] = useState("metric");
   const [favorites, setFavorites] = useState([]);
   const [data, setData] = useState(null);
@@ -30,17 +31,30 @@ function App() {
     const favoriteCities = JSON.parse(localStorage.getItem("favoriteCities"));
     favoriteCities?.length && setFavorites(favoriteCities);
 
-    navigator.geolocation.getCurrentPosition(location => {
-      const { latitude, longitude } = location.coords;
-      fetchData({ latitude: latitude, longitude });
-    },()=>setError("Cannot access your location"));
+    const temperatureUnits = JSON.parse(
+      localStorage.getItem("temperatureUnits")
+    );
+
+    navigator.geolocation.getCurrentPosition(
+      location => {
+        const { latitude, longitude } = location.coords;
+        fetchData({ latitude, longitude }, temperatureUnits);
+      },
+      () => setError("Cannot access your location")
+    );
+
+    temperatureUnits && setUnits(temperatureUnits);
   }, []);
+
+  useEffect(() => {
+    displayedLocation && fetchData(displayedLocation, units);
+  }, [units]);
 
   useEffect(() => {
     localStorage.setItem("favoriteCities", JSON.stringify(favorites));
   }, [favorites]);
 
-  const fetchData = async location => {
+  async function fetchData(location, units) {
     setLoading(true);
     setError(null);
 
@@ -57,8 +71,8 @@ function App() {
       response = await response.json();
 
       if (response.cod === 200) {
+        setDisplayedLocation(location);
         setData({ ...response, units });
-        setLocation("");
       } else {
         throw new Error(response.message);
       }
@@ -67,7 +81,7 @@ function App() {
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   const handleError = message => {
     setData(null);
@@ -76,7 +90,10 @@ function App() {
   };
 
   const changeUnits = event => {
-    setUnits(event.target.value);
+    const { value } = event.target;
+
+    localStorage.setItem("temperatureUnits", JSON.stringify(value));
+    setUnits(value);
   };
 
   const validateLocation = value => {
@@ -100,7 +117,9 @@ function App() {
           className={style.form}
           onSubmit={event => {
             event.preventDefault();
-            location.length && !locationErrors.length && fetchData(location);
+            location.length &&
+              !locationErrors.length &&
+              fetchData(location, units);
           }}
         >
           <FontAwesomeIcon icon={faSearch} className={style.searchIcon} />
@@ -178,7 +197,7 @@ function App() {
           <FavoriteCities
             favorites={favorites}
             setFavorites={setFavorites}
-            fetchData={fetchData}
+            fetchData={location => fetchData(location, units)}
           />
         </Section>
       </SideMenu>
