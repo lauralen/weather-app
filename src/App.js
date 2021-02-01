@@ -3,6 +3,7 @@ import openWeatherKey from "./utils/openWeatherKey";
 
 import Header from "./layout/Header";
 import SideMenu from "./layout/SideMenu";
+import Footer from "./layout/Footer";
 
 import CityInfo from "./components/CityInfo";
 import WeatherCard from "./components/WeatherCard";
@@ -224,6 +225,11 @@ function App() {
           <p>Search location to see weather data</p>
         )}
       </main>
+
+      <Footer>
+        Designed and <a href="https://github.com/lauralen">coded</a> by{" "}
+        <a href="https://www.linkedin.com/in/lauralenkut/">Laura L.</a>
+      </Footer>
 
       <SideMenu
         isOpen={sideMenuOpen}

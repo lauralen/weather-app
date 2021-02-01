@@ -29,7 +29,11 @@ ul {
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: $color-primary;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 h1 {
