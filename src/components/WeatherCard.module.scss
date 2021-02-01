@@ -2,7 +2,7 @@
 @import "../scss/mixins";
 
 .container {
-  min-width: 30rem;
+  min-width: 32rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -11,7 +11,12 @@
   padding: 1rem;
 
   &:not(:first-child) {
-    border-left: 1px solid $color-grey;
+    border-top: 1px solid $color-grey;
+
+    @include respond-tablet {
+      border-top: none;
+      border-left: 1px solid $color-grey;
+    }
   }
 }
 
