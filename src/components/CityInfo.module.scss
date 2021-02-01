@@ -1,0 +1,16 @@
+@import "../scss/variables";
+@import "../scss/mixins";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.title {
+  margin-right: 1rem;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: $color-black;
+}

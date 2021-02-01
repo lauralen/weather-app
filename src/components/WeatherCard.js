@@ -1,18 +1,12 @@
 import React from "react";
 import style from "./WeatherCard.module.scss";
 
-import Button from "./Button";
 import WeatherIcon from "./WeatherIcon";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faStar,
-  faTint,
-  faWind,
-  faCloud
-} from "@fortawesome/free-solid-svg-icons";
+import { faTint, faWind, faCloud } from "@fortawesome/free-solid-svg-icons";
 
-const WeatherCard = ({ data, favorites, setFavorites }) => {
+const WeatherCard = ({ data }) => {
   const {
     temp,
     humidity,
@@ -25,8 +19,6 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
   } = data;
   const { description, id } = weather[0];
 
-  const isFavorite = favorites.find(city => city.name === name);
-
   const unit =
     units === "metric"
       ? { temperature: "°C", speed: "m/s" }
@@ -35,23 +27,8 @@ const WeatherCard = ({ data, favorites, setFavorites }) => {
   return (
     <div className={style.container}>
       <div className={style.main}>
-        <div className={style.favoriteWrapper}>
-          {isFavorite || favorites.length > 20 ? null : (
-            <Button
-              type="primary"
-              onClick={() => {
-                setFavorites([...favorites, { name, country }]);
-              }}
-            >
-              <FontAwesomeIcon icon={faStar} />
-            </Button>
-          )}
-        </div>
+        <h3 className={style.description}>Current</h3>
 
-        <h3 className={style.description}>Current weather</h3>
-        <h2>
-          {name}, {country}
-        </h2>
         <div>
           <div className={style.icon}>
             <WeatherIcon id={String(id)} />

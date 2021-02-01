@@ -4,6 +4,7 @@ import openWeatherKey from "./utils/openWeatherKey";
 import Header from "./layout/Header";
 import SideMenu from "./layout/SideMenu";
 
+import CityInfo from "./components/CityInfo";
 import WeatherCard from "./components/WeatherCard";
 import ForecastCard from "./components/ForecastCard";
 import Map from "./components/Map";
@@ -186,14 +187,17 @@ function App() {
           <p className={style.error}>{error}</p>
         ) : data ? (
           <>
+            <CityInfo
+              data={data.locationInfo}
+              favorites={favorites}
+              setFavorites={setFavorites}
+            />
+
             <WeatherCard
               data={{
                 ...data.current,
-                ...data.locationInfo,
                 units: data.units
               }}
-              favorites={favorites}
-              setFavorites={setFavorites}
             />
 
             <h3 className={style.description}>Forecast</h3>
@@ -203,12 +207,12 @@ function App() {
                   key={index}
                   data={{
                     ...dayData,
-                    ...data.locationInfo,
                     units: data.units
                   }}
                 />
               );
             })}
+
             <Map
               position={[
                 data.locationInfo.coord.lat,
