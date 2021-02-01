@@ -2,18 +2,14 @@
 @import "../scss/mixins";
 
 .container {
+  min-width: 30rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
   text-align: center;
   padding: 2rem;
-  border-bottom: 1px solid $color-grey;
-}
-
-.main {
-  width: 65%;
-  margin-right: 3rem;
+  border-left: 1px solid $color-grey;
 }
 
 .description {
@@ -29,19 +25,19 @@
 }
 
 .list {
-  width: 35%;
+  margin-top: 5rem;
   display: flex;
-  flex-direction: column;
   justify-content: space-around;
   text-align: center;
   font-weight: 300;
   font-size: 1.8rem;
-  font-weight: 500;
 
   li {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem;
   }
 }
 

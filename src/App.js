@@ -193,25 +193,26 @@ function App() {
               setFavorites={setFavorites}
             />
 
-            <WeatherCard
-              data={{
-                ...data.current,
-                units: data.units
-              }}
-            />
+            <div className={style.weatherCards}>
+              <WeatherCard
+                data={{
+                  ...data.current,
+                  units: data.units
+                }}
+              />
 
-            <h3 className={style.description}>Forecast</h3>
-            {data.daily.map((dayData, index) => {
-              return (
-                <ForecastCard
-                  key={index}
-                  data={{
-                    ...dayData,
-                    units: data.units
-                  }}
-                />
-              );
-            })}
+              {data.daily.map((dayData, index) => {
+                return (
+                  <ForecastCard
+                    key={index}
+                    data={{
+                      ...dayData,
+                      units: data.units
+                    }}
+                  />
+                );
+              })}
+            </div>
 
             <Map
               position={[

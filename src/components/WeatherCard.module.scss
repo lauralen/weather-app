@@ -2,35 +2,13 @@
 @import "../scss/mixins";
 
 .container {
-  min-height: calc(100vh - 5.9rem);
-  display: flex;
-  flex-direction: column;
-
-  > * {
-    padding: 1rem;
-  }
-
-  @include respond-desktop {
-    flex-direction: row;
-
-    > * {
-      width: 50%;
-    }
-  }
-}
-
-.main {
+  min-width: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: stretch;
   text-align: center;
-}
-
-.favoriteWrapper {
-  align-self: flex-end;
-  min-height: 3.5rem;
-  margin-bottom: 3rem;
+  padding: 1rem;
 }
 
 .description {
