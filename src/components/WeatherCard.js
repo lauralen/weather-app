@@ -17,7 +17,7 @@ const WeatherCard = ({ data }) => {
 
   return (
     <div className={style.container}>
-      <h3 className={style.description}>Current</h3>
+      <h3 className={style.description}>{data?.dt}</h3>
 
       <div>
         <div className={style.icon}>
@@ -25,8 +25,17 @@ const WeatherCard = ({ data }) => {
         </div>
         <p className={style.description}>{description}</p>
         <h3>
-          {Math.round(temp)}
-          {unit.temperature}
+          {typeof temp === "number" ? (
+            <>
+              {Math.round(temp)} {unit.temperature}
+            </>
+          ) : (
+            <>
+              {Math.round(temp.max)}
+              {unit.temperature} / {Math.round(temp.min)}
+              {unit.temperature}
+            </>
+          )}
         </h3>
       </div>
       <ul className={style.list}>

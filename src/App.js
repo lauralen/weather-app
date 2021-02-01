@@ -6,7 +6,6 @@ import SideMenu from "./layout/SideMenu";
 
 import CityInfo from "./components/CityInfo";
 import WeatherCard from "./components/WeatherCard";
-import ForecastCard from "./components/ForecastCard";
 import Map from "./components/Map";
 import Button from "./components/Button";
 import Tooltip from "./components/Tooltip";
@@ -203,7 +202,7 @@ function App() {
 
               {data.daily.map((dayData, index) => {
                 return (
-                  <ForecastCard
+                  <WeatherCard
                     key={index}
                     data={{
                       ...dayData,
