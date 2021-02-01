@@ -2,12 +2,13 @@
 
 ## About
 
-React web app that displays current weather information using OpenWeatherMap API.
+React web app that displays weather information using OpenWeatherMap API.
 
 ### Features
 
 - Search by city name
 - Show weather by current device location
+- Display current weather information and weather forecast
 - Display selected weather layers (clouds, wind speed, etc.) on a map
 - Save favorite cities
 
