@@ -9,15 +9,45 @@ import { faTint, faWind, faCloud } from "@fortawesome/free-solid-svg-icons";
 const WeatherCard = ({ data }) => {
   const { temp, humidity, clouds, weather, wind_speed, units } = data;
   const { description, id } = weather[0];
+  const date = new Date(data.dt * 1000);
 
   const unit =
     units === "metric"
       ? { temperature: "°C", speed: "m/s" }
       : { temperature: "°F", speed: "mph" };
 
+  function getDate() {
+    let month = date.getMonth() + 1;
+    let monthDay = date.getDate();
+
+    return month + "/" + monthDay;
+  }
+
+  function getDayOfTheWeek() {
+    switch (date.getDay()) {
+      case 0:
+        return "Sunday";
+      case 1:
+        return "Monday";
+      case 2:
+        return "Tuesday";
+      case 3:
+        return "Wednesday";
+      case 4:
+        return "Thursday";
+      case 5:
+        return "Friday";
+      case 6:
+        return "Saturday";
+      default:
+        return "";
+    }
+  }
+
   return (
     <div className={style.container}>
-      <h3 className={style.description}>{data?.dt}</h3>
+      <h3 className={style.description}>{getDayOfTheWeek()}</h3>
+      <p>{getDate()}</p>
 
       <div>
         <div className={style.icon}>
