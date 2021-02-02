@@ -37,6 +37,10 @@
   }
 }
 
+.main {
+  min-height: 100vh;
+}
+
 .weatherCards {
   display: flex;
   flex-direction: column;
