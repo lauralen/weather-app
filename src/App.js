@@ -194,17 +194,11 @@ function App() {
             />
 
             <div className={style.weatherCards}>
-              <WeatherCard
-                data={{
-                  ...data.current,
-                  units: data.units
-                }}
-              />
-
               {data.daily.map((dayData, index) => {
                 return (
                   <WeatherCard
                     key={index}
+                    index={index}
                     data={{
                       ...dayData,
                       units: data.units

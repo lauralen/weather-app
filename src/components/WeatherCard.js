@@ -6,7 +6,7 @@ import WeatherIcon from "./WeatherIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTint, faWind, faCloud } from "@fortawesome/free-solid-svg-icons";
 
-const WeatherCard = ({ data }) => {
+const WeatherCard = ({ index, data }) => {
   const { temp, humidity, clouds, weather, wind_speed, units } = data;
   const { description, id } = weather[0];
   const date = new Date(data.dt * 1000);
@@ -21,6 +21,16 @@ const WeatherCard = ({ data }) => {
     let monthDay = date.getDate();
 
     return month + "/" + monthDay;
+  }
+
+  function getDay() {
+    if (index === 0) {
+      return "Today";
+    } else if (index === 1) {
+      return "Tomorrow";
+    } else {
+      return getDayOfTheWeek();
+    }
   }
 
   function getDayOfTheWeek() {
@@ -46,7 +56,7 @@ const WeatherCard = ({ data }) => {
 
   return (
     <div className={style.container}>
-      <h3 className={style.description}>{getDayOfTheWeek()}</h3>
+      <h3 className={style.description}>{getDay()}</h3>
       <p>{getDate()}</p>
 
       <div>
